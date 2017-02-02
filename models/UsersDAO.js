@@ -13,7 +13,7 @@ module.exports = {
 	},
 
 	getUser(id) {
-		return db.one('SELECT * FROM users WHERE id = '+ id)
+		return db.query('SELECT * FROM users WHERE id = '+ id)
 		.then((result) =>{
 			console.log(result);
 			return result;
@@ -47,7 +47,7 @@ module.exports = {
 	},
 
 	updateUser(req){
-		return db.one('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *', req.body.user)
+		return db.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *', req.body.user)
 		.then((result) => {
 			console.log(result);
 			return result;
@@ -56,5 +56,17 @@ module.exports = {
 			console.log(error);
 			throw error;
 		})
+	},
+
+	getCharacters(userId) {
+		return db.query('SELECT * FROM characters WHERE user_id = ' + userId)
+		.then((result) =>{
+			console.log(result);
+			return result;
+		})
+		.catch((error)=> {
+			throw error;
+		})
 	}
+
 }

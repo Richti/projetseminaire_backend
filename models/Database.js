@@ -7,7 +7,7 @@ var config = {
   database: 'efrei',
   user: 'efrei',
   port: 5432,
-  password: '1994'
+  password: '0000'
 };
 
 //console.log(config);

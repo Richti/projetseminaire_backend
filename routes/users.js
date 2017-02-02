@@ -7,13 +7,15 @@ router.get('/', function(req, res, next){
 	UserDAO.getAll()
 	.then((result) => {
 		var users = { 
-				"users" : result
+			"users" : result
 		};
 		res.statusCode = 200;
 		res.send(users);
 	})
 	.catch((error) => {
 		console.log(error);
+		res.statusCode = 403;
+		res.send(error);
 	})
 });
 
@@ -21,13 +23,14 @@ router.get('/:id', function(req, res, next){
 	UserDAO.getUser(req.params.id)
 	.then((result) =>{
 		var user = { 
-				"user" : result
+			"user" : result[0]
 		};
 		res.statusCode = 200;
 		res.send(user);
 	})
 	.catch(function(error){
 		console.log(error);
+		res.statusCode = 403;
 		res.send(error);
 	})
 });
@@ -40,6 +43,7 @@ router.delete('/:id', function(req, res, next){
 		console.log("user deleted");
 	})
 	.catch(function(error){
+		res.statusCode = 403;
 		console.log(error);
 	})
 });
@@ -49,13 +53,14 @@ router.post('/', function(req, res, next){
 	UserDAO.createUser(req)
 	.then((result) => {
 		var user = { 
-				"user" : result
+			"user" : result
 		};
 		res.statusCode = 200;
 		res.send(result);
 		console.log("user created");
 	})
 	.catch(function(error){
+		res.statusCode = 403;
 		console.log(error);
 	})
 });
@@ -65,19 +70,36 @@ router.put('/:id', function(req, res, next){
 		UserDAO.updateUser(req)
 		.then((result) => {
 			var user = { 
-				"user" : result
+				"user" : result[0]
 			}
 			res.statusCode = 200;
 			res.send(user);
 			console.log("user updated");
 		})
 		.catch(function(error){
+			res.statusCode = 403;
 			console.log(error);
 		})
 	} else {
 		res.statusCode = 403;
 		res.send("Vous ne pouvez pas mettre à jour cet user");
 	}
+});
+
+router.get('/:id/characters', function(req, res, next){
+	UserDAO.getCharacters(req.params.id)
+	.then((result) =>{
+		var characters = { 
+			"characters" : result
+		};
+		res.statusCode = 200;
+		res.send(characters);
+	})
+	.catch(function(error){
+		console.log(error);
+		res.statusCode = 403;	
+		res.send(error);
+	})
 });
 
 

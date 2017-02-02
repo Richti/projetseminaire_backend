@@ -3,7 +3,7 @@ const db = require('../models/Database');
 module.exports = {
 
 	getAll() {
-		return db.query('SELECT * FROM users')
+		return db.query('SELECT * FROM characters')
 		.then((result)=> {
 			return result;
 			})
@@ -12,12 +12,10 @@ module.exports = {
 		})
 	},
 
-	getUser(id) {
-		return db.query('SELECT * FROM users WHERE id = ${id}', 
-		{
-			id : id
-		})
+	getCharacter(id) {
+		return db.query('SELECT * FROM characters WHERE id = ' + id)
 		.then((result) =>{
+			console.log(result);
 			return result;
 		})
 		.catch((error)=> {
@@ -25,14 +23,10 @@ module.exports = {
 		})
 	},
 
-	createUser(req){
-		return db.query('INSERT INTO users (name, email, alliance_id) VALUES (${name}, ${email}, ${alliance_id}) RETURNING *',
-		{
-			name : req.body.name,
-			email : req.body.email,
-			alliance_id : req.body.alliance_id
-
-		})
+	createCharacter(req){
+		var character = req.body.character;
+		character.position = "(" + character.position.x + "," + character.position.y + ")";
+		return db.query('INSERT INTO characters (name, class, user_id, position) VALUES (${name}, ${class}, ${user_id}, ${position}) RETURNING *', character)
 		.then((result) => {
 			console.log(result);
 			return result;
@@ -43,8 +37,8 @@ module.exports = {
 		})
 	},
 
-	deleteUser(id){
-		return db.query('DELETE FROM users WHERE id = $1', id)
+	deleteCharacter(id){
+		return db.query('DELETE FROM characters WHERE id = $1', id)
 		.then((result) =>{
 			console.log(result);
 		})
@@ -54,20 +48,26 @@ module.exports = {
 		})
 	},
 
-	updateUser(req){
-		return db.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *',
-		{
-			name : req.body.name,
-			email : req.body.email,
-			alliance_id : req.body.alliance_id,
-			id : req.body.id
-		})
+	updateCharacter(req){
+		var character = req.body.character;
+		character.position = "(" + character.position.x + "," + character.position.y + ")";
+		return db.query('UPDATE characters SET name = ${name}, class = ${class}, user_id= ${user_id}, position= ${position} WHERE id = ${id} RETURNING *', character)
 		.then((result) => {
 			console.log(result);
 			return result;
 		})
 		.catch((error) => {
 			console.log(error);
+			throw error;
+		})
+	},
+
+	getCharactersByClass(class1) {
+		return db.query('SELECT * FROM characters WHERE class = $1;', class1)
+		.then((result)=> {
+			return result;
+			})
+		.catch((error)=> {
 			throw error;
 		})
 	}
