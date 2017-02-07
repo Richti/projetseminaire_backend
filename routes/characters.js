@@ -102,5 +102,37 @@ router.get('/class/:class', function(req, res, next){
 	})
 });
 
+router.get('/:id/allies/:position', function(req, res, next){
+	CharacterDAO.getAlliesArroundXMeters(req)
+	.then((result) =>{
+		var allies = { 
+			"allies" : result
+		};
+		res.statusCode = 200;
+		res.send(allies);
+	})
+	.catch(function(error){
+		console.log(error);
+		res.statusCode = 403;	
+		res.send("Personne dans le coin ! T'es seul !");
+	})
+});
+
+router.get('/:id/ennemies/:position', function(req, res, next){
+	CharacterDAO.getEnnemiesArroundXMeters(req)
+	.then((result) =>{
+		var ennemies = { 
+			"ennemies" : result
+		};
+		res.statusCode = 200;
+		res.send(ennemies);
+	})
+	.catch(function(error){
+		console.log(error);
+		res.statusCode = 403;	
+		res.send("Aucun ennemies dans le coin ! T'es seul !");
+	})
+});
+
 
 module.exports = router;
