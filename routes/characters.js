@@ -102,7 +102,7 @@ router.get('/class/:class', function(req, res, next){
 	})
 });
 
-router.get('/:id/allies/:position', function(req, res, next){
+router.get('/:id/allies/:radius', function(req, res, next){
 	CharacterDAO.getAlliesArroundXMeters(req)
 	.then((result) =>{
 		var allies = { 
@@ -114,12 +114,12 @@ router.get('/:id/allies/:position', function(req, res, next){
 	.catch(function(error){
 		console.log(error);
 		res.statusCode = 403;	
-		res.send("Personne dans le coin ! T'es seul !");
+		res.send("Aucun de tes amis sont dans les alentours ! T'es seul... Livré à toi même...");
 	})
 });
 
-router.get('/:id/ennemies/:position', function(req, res, next){
-	CharacterDAO.getEnnemiesArroundXMeters(req)
+router.get('/:id/ennemies/:radius', function(req, res, next){
+	CharacterDAO.getEnemiesArroundXMeters(req)
 	.then((result) =>{
 		var ennemies = { 
 			"ennemies" : result
@@ -130,7 +130,7 @@ router.get('/:id/ennemies/:position', function(req, res, next){
 	.catch(function(error){
 		console.log(error);
 		res.statusCode = 403;	
-		res.send("Aucun ennemies dans le coin ! T'es seul !");
+		res.send("Tu es tranquille ! Pas de méchants à l'horizon !");
 	})
 });
 

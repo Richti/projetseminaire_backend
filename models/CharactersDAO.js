@@ -72,25 +72,28 @@ module.exports = {
 		})
 	},
 
-	//Pas encore fini
 	getAlliesArroundXMeters(req){
 		var idCharacter = req.params.id;
-		var position = req.params.position;
-		//getposition_x : position[0]
-		//getposition_y : position[1]
-		//Position utiliser : postgis permettant d'avoir ST_DWithin
-		console.log(position);
-		return db.query('SELECT * ' + 
-			'FROM characters c ' +
-			'JOIN users u ON c.user_id = u.id ' +
-			'JOIN alliances a ON u.alliance_id = a.id ' +
-			'WHERE a.name =  ' +
-				'(SELECT a.name  ' +
-			    'FROM characters c ' +
-				'JOIN users u ON c.user_id = u.id ' +
-				'JOIN alliances a ON u.alliance_id = a.id ' +
-			    'WHERE c.id = ' + idCharacter + ') ' +
-			'AND c.id NOT IN (SELECT id FROM characters WHERE id = ' +  idCharacter+ ')')
+		var radius = req.params.radius;
+		var req = 'SELECT c.id, c.name, c.class, c.position, a.name ' +
+					'FROM characters c ' +
+					'JOIN users u ON c.user_id = u.id ' +
+					'JOIN alliances a ON u.alliance_id = a.id ' +
+					'WHERE a.id = ' +
+					'(SELECT a.id ' +
+					'FROM characters c ' + 
+					'JOIN users u ON c.user_id = u.id ' +
+					'JOIN alliances a ON u.alliance_id = a.id ' +
+					'WHERE c.id = ' + idCharacter + ') ' +
+
+					'AND ' +
+					'(SELECT position::point <-> (SELECT position ' + 
+					'FROM characters ' +
+					'WHERE id = ' + idCharacter + ')::point) <= ' + radius +
+					
+					'AND c.id NOT IN (SELECT id FROM characters WHERE c.id = ' + idCharacter + ')';
+		//console.log("ID : " + idCharacter + " - Radius" + radius);
+		return db.query(req)
 		.then((result)=> {
 			return result;
 			})
@@ -99,21 +102,28 @@ module.exports = {
 		})
 	},
 
-	getEnnemiesArroundXMeters(req){
+	getEnemiesArroundXMeters(req){
 		var idCharacter = req.params.id;
-		var position = req.params.position;
-		console.log(position);
-		return db.query('SELECT * ' + 
-			'FROM characters c ' +
-			'JOIN users u ON c.user_id = u.id ' +
-			'JOIN alliances a ON u.alliance_id = a.id ' +
-			'WHERE NOT a.name =  ' +
-				'(SELECT a.name  ' +
-			    'FROM characters c ' +
-				'JOIN users u ON c.user_id = u.id ' +
-				'JOIN alliances a ON u.alliance_id = a.id ' +
-			    'WHERE c.id = ' + idCharacter + ') ' +
-			'AND c.id NOT IN (SELECT id FROM characters WHERE id = ' +  idCharacter+ ')')
+		var radius = req.params.radius;
+		var req = 'SELECT c.id, c.name, c.class, c.position, a.name ' +
+					'FROM characters c ' +
+					'JOIN users u ON c.user_id = u.id ' +
+					'JOIN alliances a ON u.alliance_id = a.id ' +
+					'WHERE NOT a.id = ' +
+					'(SELECT a.id ' +
+					'FROM characters c ' + 
+					'JOIN users u ON c.user_id = u.id ' +
+					'JOIN alliances a ON u.alliance_id = a.id ' +
+					'WHERE c.id = ' + idCharacter + ') ' +
+
+					'AND ' +
+					'(SELECT position::point <-> (SELECT position ' + 
+					'FROM characters ' +
+					'WHERE id = ' + idCharacter + ')::point) <= ' + radius +
+
+					'AND c.id NOT IN (SELECT id FROM characters WHERE c.id = ' + idCharacter + ')';
+		//console.log("ID : " + idCharacter + " - Radius" + radius);
+		return db.query(req)
 		.then((result)=> {
 			return result;
 			})
