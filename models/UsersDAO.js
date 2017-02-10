@@ -24,7 +24,7 @@ module.exports = {
 	},
 
 	createUser(req){
-		return DB.accessor.query('INSERT INTO users (name, email, alliance_id) VALUES (${name}, ${email}, ${alliance_id}) RETURNING *', req.body.user)
+		return DB.accessor.query('INSERT INTO users (name, email) VALUES (${name}, ${email}) RETURNING *', req.body.user)
 		.then((result) => {
 			console.log(result);
 			return result;
@@ -47,7 +47,7 @@ module.exports = {
 	},
 
 	updateUser(req){
-		return DB.accessor.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *', req.body.user)
+		return DB.accessor.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = '+ req.params.id +' RETURNING *', req.body.user)
 		.then((result) => {
 			console.log(result);
 			return result;

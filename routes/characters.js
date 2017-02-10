@@ -13,9 +13,8 @@ router.get('/', function(req, res, next){
         });
 	})
 	.catch((error) => {
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;		
-		res.send(error);
 	})
 });
 
@@ -30,9 +29,8 @@ router.get('/:id', function(req, res, next){
         });
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;	
-		res.send(error);
 	})
 });
 
@@ -48,8 +46,8 @@ router.delete('/:id', function(req, res, next){
 		console.log("Character deleted");
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;	
 	})
 });
 
@@ -66,8 +64,8 @@ router.post('/', function(req, res, next){
 		console.log("Character created !");
 	})
 	.catch(function(error){
-		console.log(error);
-		res.statusCode = 403;	
+		res.status(500).json({ status: 'Error', message: error })
+		console.log(error);	
 	})
 });
 
@@ -85,8 +83,8 @@ router.put('/:id', function(req, res, next){
 			console.log("Character updated");
 		})
 		.catch(function(error){
-			console.log(error);
-			res.statusCode = 403;		
+			res.status(500).json({ status: 'Error', message: error })
+			console.log(error);		
 		})
 	/*} else {
 		res.statusCode = 403;
@@ -105,9 +103,8 @@ router.get('/class/:class', function(req, res, next){
 		res.send(characters);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;	
-		res.send("Cette classe n'existe pas.");
 	})
 });
 
@@ -121,9 +118,8 @@ router.get('/:id/allies/:radius', function(req, res, next){
 		res.send(allies);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;	
-		res.send("Aucun de tes amis sont dans les alentours ! T'es seul... Livré à toi même...");
 	})
 });
 
@@ -137,9 +133,8 @@ router.get('/:id/ennemies/:radius', function(req, res, next){
 		res.send(ennemies);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;	
-		res.send("Tu es tranquille ! Pas de méchants à l'horizon !");
 	})
 });
 

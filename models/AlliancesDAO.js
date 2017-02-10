@@ -47,7 +47,7 @@ module.exports = {
 	},
 
 	updateAlliance(req){
-		return DB.accessor.query('UPDATE alliances SET name = ${name} WHERE id = ${id} RETURNING *', req.body.alliance)
+		return DB.accessor.query('UPDATE alliances SET name = ${name} WHERE id = '+ req.params.id +' RETURNING *', req.body.alliance)
 		.then((result) => {
 			console.log(result);
 			return result;

@@ -2,88 +2,94 @@ var express = require('express');
 var router = express.Router();
 const AllianceDAO = require('../models/AlliancesDAO');
 
-/* GET Alliances listing. */
+//Get all alliances
 router.get('/', function(req, res, next){
 	AllianceDAO.getAll()
 	.then((result) => {
-		var alliances = { 
-			"alliances" : result
-		};
-		res.statusCode = 200;
-		res.send(alliances);
+		res.status(200)
+        .json({
+          status: 'success',
+          alliances: result
+        });
 	})
 	.catch((error) => {
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;
-		res.send(error);
 	})
 });
 
+//Get an alliance by id
 router.get('/:id', function(req, res, next){
 	AllianceDAO.getAlliance(req.params.id)
 	.then((result) =>{
-		var alliance = { 
-			"alliance" : result[0]
-		};
-		res.statusCode = 200;
-		res.send(alliance);
+		res.status(200)
+        .json({
+          status: 'success',
+          alliance: result[0]
+        });
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;
-		res.send(error);
 	})
 });
 
+//Delete an alliance by id
 router.delete('/:id', function(req, res, next){
 	AllianceDAO.deleteAlliance(req.params.id)
 	.then(function(result){
-		res.statusCode = 200;
-		res.send(result);
-		console.log("alliance deleted");
+		res.status(200)
+        .json({
+          status: 'success',
+          "message": []
+        });
+		console.log("Alliance deleted !");
 	})
 	.catch(function(error){
-		res.statusCode = 403;
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
 	})
 });
 
-
+//Create an alliance
 router.post('/', function(req, res, next){
 	AllianceDAO.createAlliance(req)
 	.then((result) => {
-		var alliance = { 
-			"alliance" : result
-		};
-		res.statusCode = 200;
-		res.send(result);
-		console.log("alliance created");
+		res.status(200)
+        .json({
+	        status: "success",
+	        message: "Inserted one alliance",
+	        alliance : result[0]
+        });
+		console.log("Alliance created");
 	})
 	.catch(function(error){
-		res.statusCode = 403;
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
 	})
 });
 
+//Update an alliance
 router.put('/:id', function(req, res, next){
-	if (req.params.id == req.body.alliance.id){
+	//if (req.params.id == req.body.alliance.id){
 		AllianceDAO.updateAlliance(req)
 		.then((result) => {
-			var alliance = { 
-				"alliance" : result[0]
-			}
-			res.statusCode = 200;
-			res.send(alliance);
-			console.log("alliance updated");
+			res.status(200)
+        	.json({
+		        status: "success",
+		        message: "modified a alliance",
+		        alliance : result[0]
+        	});
+			console.log("Alliance updated");
 		})
 		.catch(function(error){
-			res.statusCode = 403;
+			res.status(500).json({ status: 'Error', message: error })
 			console.log(error);
 		})
-	} else {
+	/*} else {
 		res.statusCode = 403;
 		res.send("Vous ne pouvez pas mettre à jour cet alliance");
-	}
+	}*/
 });
 
 router.get('/:id/users', function(req, res, next){
@@ -96,9 +102,8 @@ router.get('/:id/users', function(req, res, next){
 		res.send(users);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;
-		res.send(error);
 	})
 });
 
@@ -112,9 +117,8 @@ router.get('/:id/characters', function(req, res, next){
 		res.send(characters);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;
-		res.send(error);
 	})
 });
 
@@ -128,12 +132,10 @@ router.get('/:id/characters/:class', function(req, res, next){
 		res.send(characters);
 	})
 	.catch(function(error){
+		res.status(500).json({ status: 'Error', message: error })
 		console.log(error);
-		res.statusCode = 403;
-		res.send(error);
 	})
 });
-
 
 
 module.exports = router;

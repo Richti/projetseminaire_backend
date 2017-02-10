@@ -11,7 +11,7 @@ const deleteUser = require('./results/users/delete-users-1.json');
 const putUser = require('./results/users/put-users-1.json');
 const sql = DB.sql('../dumps/data-tests.sql');
 
-/*test.serial('Users - GET - Get all users', t => {
+test.serial('Users - GET - Get all users', t => {
   return DB.accessor.query(sql)
     .then(() => {
       return request(app)
@@ -26,7 +26,7 @@ const sql = DB.sql('../dumps/data-tests.sql');
       throw error;
     });
 });
-*/
+
 test.serial('Users - GET - Get user id ' + getUserOne.parameters.id, t => {
   return DB.accessor.query(sql)
     .then(() => {
@@ -43,7 +43,7 @@ test.serial('Users - GET - Get user id ' + getUserOne.parameters.id, t => {
     });
 });
 
-/*test.serial('Users - POST - Create User', t => {
+test.serial('Users - POST - Create User', t => {
   return DB.accessor.query(sql)
     .then(() => {
       return request(app)
@@ -91,4 +91,4 @@ test.serial('Users - PUT - Update User with id ' + putUser.parameters.id, t => {
       t.fail();
       throw error;
     });
-});*/
+});
