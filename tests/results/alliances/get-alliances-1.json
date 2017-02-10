@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "result": {
+    "status": "success",
+    "alliance": {
+      "id": 1,
+      "name": "Les gentils"
+    }
+  }
+}

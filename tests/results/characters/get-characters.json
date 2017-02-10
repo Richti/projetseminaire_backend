@@ -1,0 +1,117 @@
+{
+  "result":{
+    "status": "success",
+    "characters": [
+      {
+        "id": 1,
+        "name": "Gedeon",
+        "user_id": 1,
+        "class": "thief",
+        "position": {
+          "x": 48.792716,
+          "y": 2.359279
+        }
+      },
+      {
+        "id": 2,
+        "name": "Gimli",
+        "user_id": 2,
+        "class": "warrior",
+        "position": {
+          "x": 48.792689,
+          "y": 2.360001
+        }
+      },
+      {
+        "id": 3,
+        "name": "Pippin",
+        "user_id": 2,
+        "class": "thief",
+        "position": {
+          "x": 48.794004,
+          "y": 2.35425
+        }
+      },
+      {
+        "id": 4,
+        "name": "Merry",
+        "user_id": 3,
+        "class": "thief",
+        "position": {
+          "x": 48.789443,
+          "y": 2.363579
+        }
+      },
+      {
+        "id": 5,
+        "name": "Aragorn",
+        "user_id": 4,
+        "class": "warrior",
+        "position": {
+          "x": 48.789216,
+          "y": 2.36434
+        }
+      },
+      {
+        "id": 6,
+        "name": "Boromir",
+        "user_id": 4,
+        "class": "warrior",
+        "position": {
+          "x": 48.78864,
+          "y": 2.36377
+        }
+      },
+      {
+        "id": 7,
+        "name": "Saroumane",
+        "user_id": 5,
+        "class": "mage",
+        "position": {
+          "x": 48.788495,
+          "y": 2.36562
+        }
+      },
+      {
+        "id": 8,
+        "name": "Golum",
+        "user_id": 6,
+        "class": "thief",
+        "position": {
+          "x": 48.787238,
+          "y": 2.367082
+        }
+      },
+      {
+        "id": 9,
+        "name": "Legolas",
+        "user_id": 7,
+        "class": "thief",
+        "position": {
+          "x": 48.788531,
+          "y": 2.368058
+        }
+      },
+      {
+        "id": 10,
+        "name": "Sam",
+        "user_id": 7,
+        "class": "thief",
+        "position": {
+          "x": 48.789393,
+          "y": 2.36672
+        }
+      },
+      {
+        "id": 11,
+        "name": "Faramir",
+        "user_id": 8,
+        "class": "warrior",
+        "position": {
+          "x": 48.789897,
+          "y": 2.367776
+        }
+      }
+    ]
+  }
+}

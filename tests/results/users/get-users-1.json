@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "result": {
+    "status": "success",
+    "user": {
+      "id": 1,
+      "name": "Pierrick",
+      "email": "pierrick@test.com",
+      "alliance_id": 1
+    }
+  }
+}

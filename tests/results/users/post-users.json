@@ -1,0 +1,18 @@
+{
+  "body": {
+    "user" : {
+      "name": "obama",
+      "email": "obaba@whitehouse.usa"
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "Inserted one user",
+    "user": {
+      "id": 10,
+      "name": "obama",
+      "email": "obaba@whitehouse.usa",
+      "alliance_id": null
+    }
+  }
+}

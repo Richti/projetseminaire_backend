@@ -1,0 +1,55 @@
+{
+  "result": {
+    "status": "success",
+    "users": [
+      {
+        "id": 1,
+        "name": "Pierrick",
+        "email": "pierrick@test.com",
+        "alliance_id": 1
+      },
+      {
+        "id": 2,
+        "name": "Ronan",
+        "email": "ronan@test.com",
+        "alliance_id": 1
+      },
+      {
+        "id": 3,
+        "name": "Godefroy",
+        "email": "godefroy@test.com",
+        "alliance_id": 1
+      },
+      {
+        "id": 4,
+        "name": "Bill",
+        "email": "bill@test.com",
+        "alliance_id": 3
+      },
+      {
+        "id": 5,
+        "name": "Notch",
+        "email": "notch@test.com",
+        "alliance_id": 2
+      },
+      {
+        "id": 6,
+        "name": "Fish",
+        "email": "fish@test.com",
+        "alliance_id": 2
+      },
+      {
+        "id": 7,
+        "name": "Meyer",
+        "email": "meyer@test.com",
+        "alliance_id": 2
+      },
+      {
+        "id": 8,
+        "name": "Kojima",
+        "email": "kojima@test.com",
+        "alliance_id": 3
+      }
+    ]
+  }
+}

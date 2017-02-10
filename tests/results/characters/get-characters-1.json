@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "result": {
+    "status": "success",
+    "character": {
+      "id": 1,
+      "name": "Gedeon",
+      "user_id": 1,
+      "class": "thief",
+      "position": {
+        "x": 48.792716,
+        "y": 2.359279
+      }
+    }
+  }
+}

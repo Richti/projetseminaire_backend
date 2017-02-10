@@ -1,9 +1,9 @@
-const db = require('../models/Database');
+const DB = require('../models/Database');
 
 module.exports = {
 
 	getAll() {
-		return db.query('SELECT * FROM users')
+		return DB.accessor.query('SELECT * FROM users')
 		.then((result)=> {
 			return result;
 			})
@@ -13,7 +13,7 @@ module.exports = {
 	},
 
 	getUser(id) {
-		return db.query('SELECT * FROM users WHERE id = '+ id)
+		return DB.accessor.query('SELECT * FROM users WHERE id = '+ id)
 		.then((result) =>{
 			console.log(result);
 			return result;
@@ -24,7 +24,7 @@ module.exports = {
 	},
 
 	createUser(req){
-		return db.query('INSERT INTO users (name, email, alliance_id) VALUES (${name}, ${email}, ${alliance_id}) RETURNING *', req.body.user)
+		return DB.accessor.query('INSERT INTO users (name, email, alliance_id) VALUES (${name}, ${email}, ${alliance_id}) RETURNING *', req.body.user)
 		.then((result) => {
 			console.log(result);
 			return result;
@@ -36,7 +36,7 @@ module.exports = {
 	},
 
 	deleteUser(id){
-		return db.query('DELETE FROM users WHERE id = $1', id)
+		return DB.accessor.query('DELETE FROM users WHERE id = $1', id)
 		.then((result) =>{
 			console.log(result);
 		})
@@ -47,7 +47,7 @@ module.exports = {
 	},
 
 	updateUser(req){
-		return db.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *', req.body.user)
+		return DB.accessor.query('UPDATE users SET name = ${name}, email = ${email}, alliance_id= ${alliance_id} WHERE id = ${id} RETURNING *', req.body.user)
 		.then((result) => {
 			console.log(result);
 			return result;
@@ -59,7 +59,7 @@ module.exports = {
 	},
 
 	getCharacters(userId) {
-		return db.query('SELECT * FROM characters WHERE user_id = ' + userId)
+		return DB.accessor.query('SELECT * FROM characters WHERE user_id = ' + userId)
 		.then((result) =>{
 			console.log(result);
 			return result;

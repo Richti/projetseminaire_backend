@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "body": {
+    "character":{
+      "name": "GedeonUpdated",
+      "user_id": 1,
+      "class": "warrior",
+      "position": {
+        "x": 48.722726,
+        "y": 2.339249
+      }
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "modified a character",
+    "character": {
+      "id": 1,
+      "name": "GedeonUpdated",
+      "user_id": 1,
+      "class": "warrior",
+      "position": {
+        "x": 48.722726,
+        "y": 2.339249
+      }
+    }
+  }
+}

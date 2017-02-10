@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "body": {
+    "alliance" : {
+      "name" : "Nouveau nom"
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "modified a alliance",
+    "alliance": {
+      "id": 1,
+      "name": "Nouveau nom"
+    }
+  }
+}

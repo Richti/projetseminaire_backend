@@ -1,0 +1,27 @@
+{
+  "body": {
+    "character": {
+      "name": "Trump",
+      "user_id": 1,
+      "class": "thief",
+      "position": {
+        "x": 48.792726,
+        "y": 2.359249
+      }
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "Inserted one character",
+    "character": {
+      "id": 13,
+      "name": "Trump",
+      "user_id": 1,
+      "class": "thief",
+      "position": {
+        "x": 48.792726,
+        "y": 2.359249
+      }
+    }
+  }
+}

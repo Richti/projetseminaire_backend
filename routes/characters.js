@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 const CharacterDAO = require('../models/CharactersDAO');
 
+//Get all characters
 router.get('/', function(req, res, next){
 	CharacterDAO.getAll()
 	.then((result) => {
-		var characters = { 
-			"characters" : result
-		};
-		res.statusCode = 200;
-		res.send(characters);
+		res.status(200)
+        .json({
+          status: 'success',
+          characters: result
+        });
 	})
 	.catch((error) => {
 		console.log(error);
@@ -18,14 +19,15 @@ router.get('/', function(req, res, next){
 	})
 });
 
+//Get a character by id
 router.get('/:id', function(req, res, next){
 	CharacterDAO.getCharacter(req.params.id)
-	.then((result) =>{
-		var character = { 
-			"character" : result[0]
-		};
-		res.statusCode = 200;
-		res.send(character);
+	.then((result) => {
+		res.status(200)
+        .json({
+	        status: "success",
+	        character: result[0]
+        });
 	})
 	.catch(function(error){
 		console.log(error);
@@ -34,12 +36,16 @@ router.get('/:id', function(req, res, next){
 	})
 });
 
+//Delete a character
 router.delete('/:id', function(req, res, next){
 	CharacterDAO.deleteCharacter(req.params.id)
 	.then(function(result){
-		res.statusCode = 200;
-		res.send(result);
-		console.log("character deleted");
+		res.status(200)
+        .json({
+	        status: "success",
+	        message: []
+        });
+		console.log("Character deleted");
 	})
 	.catch(function(error){
 		console.log(error);
@@ -47,16 +53,17 @@ router.delete('/:id', function(req, res, next){
 	})
 });
 
-
+//Create a character
 router.post('/', function(req, res, next){
 	CharacterDAO.createCharacter(req)
 	.then((result) => {
-		var character = { 
-			"character" : result
-		};
-		res.statusCode = 200;
-		res.send(result);
-		console.log("character created");
+		res.status(200)
+        .json({
+	        status: "success",
+	        message: "Inserted one character",
+	        character : result[0]
+        });
+		console.log("Character created !");
 	})
 	.catch(function(error){
 		console.log(error);
@@ -64,25 +71,27 @@ router.post('/', function(req, res, next){
 	})
 });
 
+//Update a character
 router.put('/:id', function(req, res, next){
-	if (req.params.id == req.body.character.id){
+	//if (req.params.id == req.body.character.id){
 		CharacterDAO.updateCharacter(req)
 		.then((result) => {
-			var character = { 
-				"character" : result[0]
-			}
-			res.statusCode = 200;
-			res.send(character);
-			console.log("character updated");
+			res.status(200)
+        	.json({
+		        status: "success",
+		        message: "modified a character",
+		        character : result[0]
+        	});
+			console.log("Character updated");
 		})
 		.catch(function(error){
 			console.log(error);
 			res.statusCode = 403;		
 		})
-	} else {
+	/*} else {
 		res.statusCode = 403;
 		res.send("Vous ne pouvez pas mettre à jour ce character");
-	}
+	}*/
 });
 
 router.get('/class/:class', function(req, res, next){

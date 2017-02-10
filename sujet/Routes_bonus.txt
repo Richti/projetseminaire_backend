@@ -1,0 +1,9 @@
+Optionnel : 
+
+- GET /alliances/id/users : renvoie la liste des users de cette alliance + 200
+- GET /alliance/id/characters : renvoie tous les personnages appartenant à des joueurs de l'alliance + 200
+- GET /users/id/characters : renvoie les personnages d'un joueur
+- GET /characters/{class} : renvoie tous les personnages de la classe donnée
+- GET /alliances/id/characters/{class} : renvoie tous les personnages de la classe donnée dans l'alliance donnée
+- GET /characters/id/allies/{radius} : renvoie tous les autres personnages de la même alliance (personnage actuel exclu) dans un radius en mètres (on considère que character.point.x = lat et character.point.y = long)
+- GET /characters/id/ennemies/{radius} : renvoie tous les personnages ennemis (= pas de la même alliance) dans un radius en mètres

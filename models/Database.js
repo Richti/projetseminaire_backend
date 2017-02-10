@@ -1,27 +1,23 @@
-var pgp = require('pg-promise')({
-   noWarnings: true
-});
+var pgp = require('pg-promise')();
+var path = require('path');
+var QueryFile = require('pg-promise').QueryFile;
 
 var config = {
   host: 'localhost',
+  port: 5432,
   database: 'efrei',
   user: 'efrei',
-  port: 5432,
-  password: '1994'
+  password: 'efrei'
 };
 
-//console.log(config);
-const DB = pgp(config);
+const DB = {
+  accessor: pgp(config),
 
-// export the class
+  sql: function (file) {
+    var fullPath = path.join(__dirname, file); // generating full path;
+    return new QueryFile(fullPath, { minify: false });
+  }
+
+};
+
 module.exports = DB;
-
-
-/*// Constructor
-function DatabaseConnector() {
-	this.connection = pgp(cn);
-}
-
-var db = new DatabaseConnector();*/
-
-

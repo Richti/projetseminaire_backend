@@ -1,0 +1,15 @@
+{
+  "body": {
+    "alliance" : {
+      "name" : "Les fous dingues"
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "Inserted one alliance",
+    "alliance": {
+      "id": 5,
+      "name": "Les fous dingues"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+- GET /users : renvoie tous les users + 200
+- GET /users/id : renvoie le user avec l'id = id + 200 
+- POST /users : créer un user avec (name, email, alliance_id) + 200 + nouvel user
+- DELETE /users/id : supprime le user avec l'id + 200
+- PUT : /users/id : modifie (name, email, alliance_id) + 200 + le user modifié
+
+- GET /alliances : renvoie tous les alliances + 200
+- GET /alliances/id : renvoie le alliance avec l'id = id + 200 
+- POST /alliances : créer un alliance avec (name) + 200 + nouvel alliance
+- DELETE /alliances/id : supprime le alliance avec l'id + 200
+- PUT : /alliances/id : modifie (name) + 200 + le alliance modifié
+
+- GET /characters : renvoie tous les characters + 200
+- GET /characters/id : renvoie le character avec l'id = id + 200 
+- POST /characters : créer un character avec (name, class, user_id, point) + 200 + nouvel character
+- DELETE /characters/id : supprime le character avec l'id + 200
+- PUT : /characters/id : modifie (name) + 200 + le character modifié

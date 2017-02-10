@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "ava"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
@@ -16,6 +17,8 @@
     "serve-favicon": "~2.3.2"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "ava": "^0.18.1",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }

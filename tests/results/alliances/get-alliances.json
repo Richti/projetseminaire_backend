@@ -1,0 +1,19 @@
+{
+  "result": {
+    "status": "success",
+    "alliances": [
+      {
+        "id": 1,
+        "name": "Les gentils"
+      },
+      {
+        "id": 2,
+        "name": "Les méchants"
+      },
+      {
+        "id": 3,
+        "name": "Les Suisses"
+      }
+    ]
+  }
+}

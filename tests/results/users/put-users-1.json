@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "id": 1
+  },
+  "body": {
+    "user": {
+      "name": "PierrickBis",
+      "email": "pierrickBis@lonestone.studio",
+      "alliance_id": 2
+    }
+  },
+  "result": {
+    "status": "success",
+    "message": "modified a user",
+    "user": {
+      "id": 1,
+      "name": "PierrickBis",
+      "email": "pierrickBis@lonestone.studio",
+      "alliance_id": 2
+    }
+  }
+}
