@@ -15,7 +15,7 @@ module.exports = {
 	getAlliance(id) {
 		return DB.accessor.query('SELECT * FROM alliances WHERE id = '+ id)
 		.then((result) =>{
-			console.log(result);
+			//console.log(result);
 			return result;
 		})
 		.catch((error)=> {
@@ -26,7 +26,7 @@ module.exports = {
 	createAlliance(req){
 		return DB.accessor.query('INSERT INTO alliances (name) VALUES (${name}) RETURNING *', req.body.alliance)
 		.then((result) => {
-			console.log(result);
+			//console.log(result);
 			return result;
 		})
 		.catch((error) => {
@@ -38,7 +38,7 @@ module.exports = {
 	deleteAlliance(id){
 		return DB.accessor.query('DELETE FROM alliances WHERE id = $1', id)
 		.then((result) =>{
-			console.log(result);
+			//console.log(result);
 		})
 		.catch((error) => {
 			console.log(error);
@@ -49,7 +49,7 @@ module.exports = {
 	updateAlliance(req){
 		return DB.accessor.query('UPDATE alliances SET name = ${name} WHERE id = '+ req.params.id +' RETURNING *', req.body.alliance)
 		.then((result) => {
-			console.log(result);
+			//console.log(result);
 			return result;
 		})
 		.catch((error) => {

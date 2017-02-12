@@ -92,15 +92,15 @@ router.put('/:id', function(req, res, next){
 	}*/
 });
 
-router.get('/class/:class', function(req, res, next){
+router.get('/all/:class', function(req, res, next){
 	console.log(req.params.class);
 	CharacterDAO.getCharactersByClass(req.params.class)
 	.then((result) =>{
-		var characters = { 
-			"characters" : result
-		};
-		res.statusCode = 200;
-		res.send(characters);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
@@ -111,11 +111,11 @@ router.get('/class/:class', function(req, res, next){
 router.get('/:id/allies/:radius', function(req, res, next){
 	CharacterDAO.getAlliesArroundXMeters(req)
 	.then((result) =>{
-		var allies = { 
-			"allies" : result
-		};
-		res.statusCode = 200;
-		res.send(allies);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
@@ -126,11 +126,11 @@ router.get('/:id/allies/:radius', function(req, res, next){
 router.get('/:id/ennemies/:radius', function(req, res, next){
 	CharacterDAO.getEnemiesArroundXMeters(req)
 	.then((result) =>{
-		var ennemies = { 
-			"ennemies" : result
-		};
-		res.statusCode = 200;
-		res.send(ennemies);
+		res.status(200)
+		.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })

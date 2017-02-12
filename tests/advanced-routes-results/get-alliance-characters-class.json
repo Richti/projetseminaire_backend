@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "id": 1,
+    "class": "thief"
+  },
+  "result": {
+    "status": "success",
+    "characters": [
+      {
+        "id": 1,
+        "name": "Gedeon",
+        "user_id": 1,
+        "class": "thief",
+        "position": {
+          "x": 48.792716,
+          "y": 2.359279
+        }
+      },
+      {
+        "id": 3,
+        "name": "Pippin",
+        "user_id": 2,
+        "class": "thief",
+        "position": {
+          "x": 48.794004,
+          "y": 2.35425
+        }
+      },
+      {
+        "id": 4,
+        "name": "Merry",
+        "user_id": 3,
+        "class": "thief",
+        "position": {
+          "x": 48.789443,
+          "y": 2.363579
+        }
+      }
+    ]
+  }
+}

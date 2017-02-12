@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "id": 2
+  },
+  "result": {
+    "status": "success",
+    "characters": [
+      {
+        "id": 2,
+        "name": "Gimli",
+        "user_id": 2,
+        "class": "warrior",
+        "position": {
+          "x": 48.792689,
+          "y": 2.360001
+        }
+      },
+      {
+        "id": 3,
+        "name": "Pippin",
+        "user_id": 2,
+        "class": "thief",
+        "position": {
+          "x": 48.794004,
+          "y": 2.35425
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "class": "warrior"
+  },
+  "result": {
+    "status": "success",
+    "characters": [
+      {
+        "id": 2,
+        "name": "Gimli",
+        "user_id": 2,
+        "class": "warrior",
+        "position": {
+          "x": 48.792689,
+          "y": 2.360001
+        }
+      },
+      {
+        "id": 5,
+        "name": "Aragorn",
+        "user_id": 4,
+        "class": "warrior",
+        "position": {
+          "x": 48.789216,
+          "y": 2.36434
+        }
+      },
+      {
+        "id": 6,
+        "name": "Boromir",
+        "user_id": 4,
+        "class": "warrior",
+        "position": {
+          "x": 48.78864,
+          "y": 2.36377
+        }
+      },
+      {
+        "id": 11,
+        "name": "Faramir",
+        "user_id": 8,
+        "class": "warrior",
+        "position": {
+          "x": 48.789897,
+          "y": 2.367776
+        }
+      }
+    ]
+  }
+}

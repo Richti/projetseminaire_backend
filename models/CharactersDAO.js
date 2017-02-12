@@ -73,64 +73,80 @@ module.exports = {
 	},
 
 	getAlliesArroundXMeters(req){
-		var idCharacter = req.params.id;
+		var id = req.params.id;
 		var radius = req.params.radius;
-		var req = 'SELECT c.id, c.name, c.class, c.position, a.name ' +
-					'FROM characters c ' +
-					'JOIN users u ON c.user_id = u.id ' +
-					'JOIN alliances a ON u.alliance_id = a.id ' +
-					'WHERE a.id = ' +
-					'(SELECT a.id ' +
-					'FROM characters c ' + 
-					'JOIN users u ON c.user_id = u.id ' +
-					'JOIN alliances a ON u.alliance_id = a.id ' +
-					'WHERE c.id = ' + idCharacter + ') ' +
+        return DB.accessor.query(
+            'SELECT characters.* ' 
+            + 'FROM characters, users '
+            + 'WHERE users.id = characters.user_id '
+            + 'AND users.alliance_id = (SELECT users.alliance_id FROM users, characters '
+            + 'WHERE users.id = characters.user_id AND characters.id = $(idChar)) '
+            + 'AND characters.id <> $(idChar) '
+            + 'AND $(zoneRadius) * acos ( '
+	            + 'sin(radians(characters.position[0])) '
+	            + '*sin(radians( (SELECT characters.position[0] FROM characters WHERE id = $(idChar)))) '
+	            + '+cos(radians(characters.position[0]))'
+	            + '*cos(radians((SELECT characters.position[0] FROM characters WHERE id = $(idChar))))'
+	            + '*cos( radians((SELECT characters.position[1] FROM characters WHERE id = $(idChar))) - radians(characters.position[1]) )'
+            + ') < $(alliesRadius) ' 
+            + 'ORDER BY acos ( '
+	            + 'sin(radians(characters.position[0])) '
+	            + '*sin(radians( (SELECT characters.position[0] FROM characters WHERE id = $(idChar)))) '
+	            + '+ cos(radians(characters.position[0]))'
+	            + '*cos(radians((SELECT characters.position[0] FROM characters WHERE id = $(idChar))))'
+	            + '*cos( radians((SELECT characters.position[1] FROM characters WHERE id = $(idChar))) - radians(characters.position[1]) )'
+            + ')',
+            {
+                idChar : id,
+                zoneRadius : 6371, //rayou de la terre en km
+                alliesRadius: radius/1000                
+            }
+        )
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                throw error;
+            })
+    },
 
-					'AND ' +
-					'(SELECT position::point <-> (SELECT position ' + 
-					'FROM characters ' +
-					'WHERE id = ' + idCharacter + ')::point) <= ' + radius +
-					
-					'AND c.id NOT IN (SELECT id FROM characters WHERE c.id = ' + idCharacter + ')';
-		//console.log("ID : " + idCharacter + " - Radius" + radius);
-		return DB.accessor.query(req)
-		.then((result)=> {
-			return result;
-			})
-		.catch((error)=> {
-			throw error;
-		})
-	},
-
-	getEnemiesArroundXMeters(req){
-		var idCharacter = req.params.id;
+    getEnemiesArroundXMeters(req){
+    	var id = req.params.id;
 		var radius = req.params.radius;
-		var req = 'SELECT c.id, c.name, c.class, c.position, a.name ' +
-					'FROM characters c ' +
-					'JOIN users u ON c.user_id = u.id ' +
-					'JOIN alliances a ON u.alliance_id = a.id ' +
-					'WHERE NOT a.id = ' +
-					'(SELECT a.id ' +
-					'FROM characters c ' + 
-					'JOIN users u ON c.user_id = u.id ' +
-					'JOIN alliances a ON u.alliance_id = a.id ' +
-					'WHERE c.id = ' + idCharacter + ') ' +
-
-					'AND ' +
-					'(SELECT position::point <-> (SELECT position ' + 
-					'FROM characters ' +
-					'WHERE id = ' + idCharacter + ')::point) <= ' + radius +
-
-					'AND c.id NOT IN (SELECT id FROM characters WHERE c.id = ' + idCharacter + ')';
-		//console.log("ID : " + idCharacter + " - Radius" + radius);
-		return DB.accessor.query(req)
-		.then((result)=> {
-			return result;
-			})
-		.catch((error)=> {
-			throw error;
-		})
-	}
-
+        return DB.accessor.query(
+            'SELECT characters.* ' 
+            + 'FROM characters, users '
+            + 'WHERE users.id = characters.user_id '
+            + 'AND users.alliance_id <> (SELECT users.alliance_id FROM users, characters '
+            + 'WHERE users.id = characters.user_id AND characters.id = $(idChar)) '
+            + 'AND characters.id <> $(idChar) '
+            + 'AND $(zoneRadius) * acos ( '
+	            + 'sin(radians(characters.position[0])) '
+	            + '*sin(radians( (SELECT characters.position[0] FROM characters WHERE id = $(idChar)))) '
+	            + '+cos(radians(characters.position[0]))'
+	            + '*cos(radians((SELECT characters.position[0] FROM characters WHERE id = $(idChar))))'
+	            + '*cos( radians((SELECT characters.position[1] FROM characters WHERE id = $(idChar))) - radians(characters.position[1]) )'
+            + ') < $(enemiesRadius) ' 
+            + 'ORDER BY acos ( '
+	            + 'sin(radians(characters.position[0])) '
+	            + '*sin(radians( (SELECT characters.position[0] FROM characters WHERE id = $(idChar)))) '
+	            + '+cos(radians(characters.position[0]))'
+	            + '*cos(radians((SELECT characters.position[0] FROM characters WHERE id = $(idChar))))'
+	            + '*cos( radians((SELECT characters.position[1] FROM characters WHERE id = $(idChar))) - radians(characters.position[1]) )'
+            + ')',
+            {
+                idChar : id,
+                zoneRadius : 6371, //rayou de la terre en km
+                enemiesRadius: radius/1000
+               
+            }
+        )
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                throw error;
+            })
+    }
 
 }

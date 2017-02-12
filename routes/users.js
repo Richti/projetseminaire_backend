@@ -61,7 +61,7 @@ router.post('/', function(req, res, next){
 	        message: "Inserted one user",
 	        user : result[0]
         });
-		console.log("user created");
+		console.log("User created");
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
@@ -95,11 +95,11 @@ router.put('/:id', function(req, res, next){
 router.get('/:id/characters', function(req, res, next){
 	UserDAO.getCharacters(req.params.id)
 	.then((result) =>{
-		var characters = { 
-			"characters" : result
-		};
-		res.statusCode = 200;
-		res.send(characters);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })

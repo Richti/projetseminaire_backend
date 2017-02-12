@@ -95,11 +95,11 @@ router.put('/:id', function(req, res, next){
 router.get('/:id/users', function(req, res, next){
 	AllianceDAO.getUsersFromAlliance(req.params.id)
 	.then((result) =>{
-		var users = { 
-			"users" : result
-		};
-		res.statusCode = 200;
-		res.send(users);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        users : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
@@ -110,11 +110,11 @@ router.get('/:id/users', function(req, res, next){
 router.get('/:id/characters', function(req, res, next){
 	AllianceDAO.getCharactersFromAlliance(req.params.id)
 	.then((result) =>{
-		var characters = { 
-			"characters" : result
-		};
-		res.statusCode = 200;
-		res.send(characters);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
@@ -125,11 +125,11 @@ router.get('/:id/characters', function(req, res, next){
 router.get('/:id/characters/:class', function(req, res, next){
 	AllianceDAO.getCharactersByClassFromAlliance(req.params.id, req.params.class)
 	.then((result) =>{
-		var characters = { 
-			"characters" : result
-		};
-		res.statusCode = 200;
-		res.send(characters);
+		res.status(200)
+        	.json({
+		        status: "success",
+		        characters : result
+        });
 	})
 	.catch(function(error){
 		res.status(500).json({ status: 'Error', message: error })
