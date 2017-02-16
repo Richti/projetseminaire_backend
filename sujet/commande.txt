@@ -1,10 +1,23 @@
-create user efrei
-create database efrei
-GRANT ALL PRIVILEGES ON DATABASE efrei to efrei
-ALTER USER efrei WITH PASSWORD 'password'
+docker exec -it <containerIdOrName> bash
+/etc/init.d/postgresql restart
+
+su - postgres
+
+psql
+CREATE USER efrei;
+CREATE DATABASE efrei;
+GRANT ALL PRIVILEGES ON DATABASE efrei TO efrei;
+ALTER USER efrei WITH PASSWORD 'efrei';
+
+adduser --uid 1001 efrei
+
+psql -U efrei efrei < /usr/src/app/dumps/schema.sql
+psql -U efrei efrei < /usr/src/app/dumps/test-data.sql
+
+-------
 
 psql -U efrei efrei < schema.sql
-psql -U postgres efrei < test-data.sql
+psql -U efrei efrei < test-data.sql
 
 npm install supertest
 ava --init
