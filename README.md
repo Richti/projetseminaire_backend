@@ -7,15 +7,19 @@ Paul Fryson & Richard Gruet - Février 2017
 //Installer les dépendances
 npm install
 
-A la racine du projet
-
-cd dumps
-psql -U postgres < schema.sql
-psql -U postgres efrei < test-data.sql
+//Mettre en place la base de données
+- cd dumps
+- psql -U postgres < schema.sql
+- psql -U postgres efrei < test-data.sql
 
 # Lancer le projet
 
-nodemon start
+- nodemon start
 localhost:3000
+
+# Phase de tests
+
+Test possible via la commande :
+- ava --serial --verbose tests/
 
 Paul Fryson & Richard Gruet

@@ -8,4 +8,4 @@ psql -U postgres efrei < test-data.sql
 
 npm install supertest
 ava --init
-ava --serial --verbose test.js
+ava --serial --verbose tests/
