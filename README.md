@@ -14,7 +14,7 @@ Paul Fryson & Richard Gruet - Février 2017
 
 # Lancer le projet
 
-- nodemon start
+- nodemon start ou npm start
 
 Lancer le navigateur : localhost:3000
 
