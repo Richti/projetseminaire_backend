@@ -1,0 +1,61 @@
+---- Dockerfile ----
+
+# Image
+FROM ubuntu
+
+# Install NodeJS Postgresql
+RUN apt-get update \
+	&& apt-get -y -q install postgresql-9.5 postgresql-client-9.5 postgresql-contrib-9.5 \
+	&& apt-get install -y nodejs-legacy \
+	&& apt-get install -y nodejs npm
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+ADD package.json /usr/src/app/package.json
+WORKDIR /usr/src/app
+
+# Install app dependencies
+RUN npm install
+COPY . /usr/src/app
+
+USER postgres
+RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
+
+RUN /etc/init.d/postgresql start \
+    && psql --command "CREATE USER efrei WITH PASSWORD 'efrei';" \
+    && psql --command "CREATE DATABASE efrei;" \
+    && psql --command "GRANT ALL PRIVILEGES ON DATABASE efrei TO efrei;" \
+    && psql --command "ALTER USER efrei WITH PASSWORD 'efrei';" \
+    && psql -U postgres < /usr/src/app/dumps/schema.sql && psql -U postgres efrei < /usr/src/app/dumps/test-data.sql \
+    && /etc/init.d/postgresql restart
+
+EXPOSE 3000
+CMD [ "npm", "start" ]
+
+---- Commandes
+
+docker exec -it <containerIdOrName> bash
+/etc/init.d/postgresql restart
+
+su - postgres
+
+psql
+CREATE USER efrei;
+CREATE DATABASE efrei;
+GRANT ALL PRIVILEGES ON DATABASE efrei TO efrei;
+ALTER USER efrei WITH PASSWORD 'efrei';
+
+adduser --uid 1001 efrei
+su - efrei
+psql -U postgres < /usr/src/app/dumps/schema.sql
+psql -U postgres efrei < /usr/src/app/dumps/test-data.sql
+
+-------
+
+psql -U efrei efrei < schema.sql
+psql -U efrei efrei < test-data.sql
+
+npm install supertest
+ava --init
+ava --serial --verbose test.js
