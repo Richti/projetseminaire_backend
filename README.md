@@ -21,9 +21,9 @@ Lancer le navigateur : localhost:3000
 
 # Phase de tests
 
-Installer avaJS : npm install -g ava
-Initialiser : ava --init
-Installer supertest : npm install -s supertest
+- Installer avaJS : npm install -g ava
+- Initialiser : ava --init
+- Installer supertest : npm install -s supertest
 
 Test possible via la commande :
 - ava --serial --verbose tests/
