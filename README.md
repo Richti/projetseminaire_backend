@@ -5,7 +5,7 @@ Paul Fryson & Richard Gruet - Février 2017
 # Installation 
 
 //Installer les dépendances
-npm install
+- npm install
 
 //Mettre en place la base de données
 - cd dumps
@@ -15,7 +15,8 @@ npm install
 # Lancer le projet
 
 - nodemon start
-localhost:3000
+
+Lancer le navigateur : localhost:3000
 
 # Phase de tests
 
